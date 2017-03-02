@@ -9,30 +9,53 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name = "USERS")
+@Table(schema = "sys", name = "users")
 public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "ID", nullable = false)
+    @Column(name = "id", nullable = false)
     private int id;
 
     @NotBlank
-    @Column(name = "NAME")
+    @Column(name = "name")
     private String name;
 
     @Email
     @NotBlank
-    @Column(name = "EMAIL", unique = true)
+    @Column(name = "email", unique = true)
     private String email;
 
     @NotBlank
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "ENABLED")
+    @Column(name = "enabled")
     private boolean enabled;
+
+    @Column(name = "min")
+    private int min;
+
+    @Column(name = "max")
+    private int max;
+
+    @Column(name = "message")
+    private String message;
 
     private Set<Role> roles;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", enabled=" + enabled +
+                ", min=" + min +
+                ", max=" + max +
+                ", message='" + message + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

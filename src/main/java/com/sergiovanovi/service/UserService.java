@@ -1,10 +1,10 @@
-package com.sergiovanovi.repository;
+package com.sergiovanovi.service;
 
 import com.sergiovanovi.model.User;
 
 import java.util.Collection;
 
-public interface UserRepository {
+public interface UserService {
 
     void save(User user);
 
@@ -14,5 +14,4 @@ public interface UserRepository {
 
     //ORDERED by id
     Collection<User> getAll();
-
 }

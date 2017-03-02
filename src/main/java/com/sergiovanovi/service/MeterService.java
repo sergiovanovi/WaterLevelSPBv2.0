@@ -1,10 +1,10 @@
-package com.sergiovanovi.repository;
+package com.sergiovanovi.service;
 
 import com.sergiovanovi.model.Meter;
 
 import java.util.Collection;
 
-public interface MeterRepository {
+public interface MeterService {
 
     void save(Meter meter);
 
