@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored ="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
@@ -21,7 +22,7 @@
     <c:forEach items="${meters}" var="meter">
         <tr>
             <td><c:out value="${fn:replace(meter.dateTime, 'T', ' ')}"/></td>
-            <td><c:out value="${meter.description}"/></td>
+            <td><c:out value="${meter.level}"/></td>
         </tr>
     </c:forEach>
 </table>
