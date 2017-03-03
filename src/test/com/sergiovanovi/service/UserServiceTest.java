@@ -32,8 +32,7 @@ public class UserServiceTest extends AbstractServiceTest{
 
     @Test
     public void get() throws Exception {
-        User expected = MockUserService.expected;
-        userService.save(expected);
+        User expected = userService.save(MockUserService.expected);
         assertTrue(expected.toString().equals(userService.get(expected.getId()).toString()));
         assertFalse(MockUserService.admin.toString().equals(userService.get(expected.getId()).toString()));
     }

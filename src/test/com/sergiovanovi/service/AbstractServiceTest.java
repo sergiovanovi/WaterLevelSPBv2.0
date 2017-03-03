@@ -22,14 +22,12 @@ import java.util.concurrent.TimeUnit;
         "classpath:spring/spring-db.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
+@Sql(scripts = "classpath:db/initDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 abstract public class AbstractServiceTest {
     private static final Logger LOG = LoggerFactory.getLogger(AbstractServiceTest.class);
 
     private static StringBuilder results = new StringBuilder();
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Autowired
     public Environment env;
@@ -46,11 +44,11 @@ abstract public class AbstractServiceTest {
 
     @AfterClass
     public static void printResult() {
-        LOG.info("\n---------------------------------" +
-                "\nTest                 Duration, ms" +
-                "\n---------------------------------\n" +
+        LOG.info("\n--------------------------------------------------------------------------------------------------------------" +
+                "\nTest                                                                                               Duration, ms" +
+                "\n---------------------------------------------------------------------------------------------------------------\n" +
                 results +
-                "---------------------------------\n");
+                "---------------------------------------------------------------------------------------------------------------\n");
         results.setLength(0);
     }
 }
