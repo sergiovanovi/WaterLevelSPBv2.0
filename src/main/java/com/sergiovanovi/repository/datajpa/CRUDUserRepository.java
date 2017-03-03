@@ -16,13 +16,17 @@ public interface CRUDUserRepository extends JpaRepository<User, Integer>{
     List<User> findAll();
 
     @Override
+    @Transactional
     User save(User user);
 
     @Modifying
     @Transactional
-    @Query("DELETE FROM users u WHERE u.id=:id")
-    void delete(@Param("id") int id);
+    @Query(value = "DELETE u FROM wlspb.users u WHERE u.id=:id", nativeQuery = true)
+    int delete(@Param("id") int id);
 
     @Override
-    User getOne(Integer id);
+    User findOne(Integer id);
+
+    @Query(value = "SELECT * FROM users u WHERE u.email=:email", nativeQuery = true)
+    User findOneByEmail(@Param("email") String email);
 }

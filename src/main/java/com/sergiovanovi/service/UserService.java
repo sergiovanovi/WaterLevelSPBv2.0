@@ -6,11 +6,13 @@ import java.util.Collection;
 
 public interface UserService {
 
-    void save(User user);
+    User save(User user);
 
-    void delete(int id);
+    boolean delete(int id);
 
     User get(int id);
+
+    User getByEmail(String email);
 
     //ORDERED by id
     Collection<User> getAll();

@@ -14,18 +14,23 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public void delete(int id) {
-        userRepository.delete(id);
+    public boolean delete(int id) {
+        return userRepository.delete(id);
     }
 
     @Override
     public User get(int id) {
         return userRepository.get(id);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return userRepository.getByEmail(email);
     }
 
     @Override

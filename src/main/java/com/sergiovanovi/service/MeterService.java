@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public interface MeterService {
 
-    void save(Meter meter);
+    Meter save(Meter meter);
 
     //ORDERED dateTime
     Collection<Meter> getAll();

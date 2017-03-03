@@ -14,8 +14,8 @@ public class DataJpaMeterRepositoryImpl implements MeterRepository{
     private CRUDMeterRepository crudMeterRepository;
 
     @Override
-    public void save(Meter meter) {
-        crudMeterRepository.save(meter);
+    public Meter save(Meter meter) {
+        return crudMeterRepository.save(meter);
     }
 
     @Override
@@ -25,6 +25,6 @@ public class DataJpaMeterRepositoryImpl implements MeterRepository{
 
     @Override
     public Meter getLast() {
-        return crudMeterRepository.findLastByDateTime();
+        return crudMeterRepository.getLast();
     }
 }

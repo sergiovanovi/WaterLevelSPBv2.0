@@ -14,18 +14,23 @@ public class DataJpaUserRepositoryImpl implements UserRepository{
     private CRUDUserRepository crudUserRepository;
 
     @Override
-    public void save(User user) {
-        crudUserRepository.save(user);
+    public User save(User user) {
+        return crudUserRepository.save(user);
     }
 
     @Override
-    public void delete(int id) {
-        crudUserRepository.delete(id);
+    public boolean delete(int id) {
+        return crudUserRepository.delete(id) != 0;
     }
 
     @Override
     public User get(int id) {
-        return crudUserRepository.getOne(id);
+        return crudUserRepository.findOne(id);
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        return crudUserRepository.findOneByEmail(email);
     }
 
     @Override
