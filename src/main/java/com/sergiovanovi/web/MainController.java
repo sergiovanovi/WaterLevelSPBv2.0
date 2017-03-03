@@ -28,7 +28,6 @@ public class MainController {
     @RequestMapping(value = "/meters")
     public String metersList(Model model){
         Collection<Meter> meters =  meterService.getAll();
-        meters.forEach(System.out::println);
         model.addAttribute("meters", meters);
         LOG.info("send to meters");
         return "meters";

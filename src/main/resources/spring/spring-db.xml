@@ -13,6 +13,7 @@
 
     <jdbc:initialize-database data-source="dataSource" enabled="true">
         <jdbc:script location="classpath:db/initDB.sql"/>
+        <jdbc:script location="classpath:db/populateDB.sql"/>
     </jdbc:initialize-database>
 
     <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
