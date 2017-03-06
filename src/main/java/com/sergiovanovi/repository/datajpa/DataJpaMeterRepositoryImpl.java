@@ -20,7 +20,7 @@ public class DataJpaMeterRepositoryImpl implements MeterRepository{
 
     @Override
     public Collection<Meter> getAll() {
-        return crudMeterRepository.findAll();
+        return crudMeterRepository.getAll();
     }
 
     @Override
