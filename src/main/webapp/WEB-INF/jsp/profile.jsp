@@ -43,10 +43,14 @@
 
 <body>
 
-<h3>Current water level</h3>
-<p><c:out value="${lastMeter.level}"/></p>
+<div id="chart_div" style="width: 1500px; height: 500px;"></div>
 
-<div align="center" id="chart_div" style="width: 1500px; height: 500px;"></div>
+<table>
+    <tr>
+        <td>Current level</td>
+        <td><c:out value="${lastMeter.level}"/></td>
+    </tr>
+</table>
 
 </body>
 </html>
