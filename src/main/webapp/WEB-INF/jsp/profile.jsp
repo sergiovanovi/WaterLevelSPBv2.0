@@ -19,7 +19,11 @@
             arr.push(['dayOfMonth', 'level']);
 
             <c:forEach items="${meters}" var="meter">
-                arr.push([String(${meter.dateTime.dayOfMonth} + '.' + ${meter.dateTime.monthValue} + '.' + ${meter.dateTime.year} + ' ' + ${meter.dateTime.hour} + ':' + ${meter.dateTime.minute}), Number(${meter.level})]);
+                arr.push([String(${meter.dateTime.dayOfMonth}
+                    + '.' + ${meter.dateTime.monthValue}
+                    + '.' + ${meter.dateTime.year}
+                    + ' ' + ${meter.dateTime.hour}
+                    + 'h'), Number(${meter.level})]);
             </c:forEach>
 
             var data = google.visualization.arrayToDataTable(arr);
@@ -38,11 +42,11 @@
 </head>
 
 <body>
+
 <h3>Current water level</h3>
 <p><c:out value="${lastMeter.level}"/></p>
 
-<h3>Water level graph</h3>
-<div id="chart_div" style="width: 1500px; height: 500px;"></div>
+<div align="center" id="chart_div" style="width: 1500px; height: 500px;"></div>
 
 </body>
 </html>
