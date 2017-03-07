@@ -27,8 +27,8 @@ public class MainController {
 
     @RequestMapping(value = "/meters")
     public String metersList(Model model){
-        Collection<Meter> meters =  meterService.getAll();
-        model.addAttribute("meters", meters);
+        model.addAttribute("metersForChart", meterService.getAll());
+        model.addAttribute("metersForTable", meterService.getAllDesc());
         LOG.info("send to meters");
         return "meters";
     }

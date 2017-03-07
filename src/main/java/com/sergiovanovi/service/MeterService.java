@@ -11,6 +11,9 @@ public interface MeterService {
     //ORDERED dateTime
     Collection<Meter> getAll();
 
+    //ORDERED dateTime DESC
+    Collection<Meter> getAllDesc();
+
     //get last meter
     Meter getLast();
 }

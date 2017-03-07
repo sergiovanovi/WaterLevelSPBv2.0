@@ -21,7 +21,7 @@ CREATE UNIQUE INDEX users_unique_id_email_idx
 
 CREATE TABLE meters (
   id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  level     INT          NOT NULL,
+  level     DOUBLE          NOT NULL,
   date_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 );

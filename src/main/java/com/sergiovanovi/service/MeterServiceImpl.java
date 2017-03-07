@@ -26,6 +26,11 @@ public class MeterServiceImpl implements MeterService{
     }
 
     @Override
+    public Collection<Meter> getAllDesc() {
+        return meterRepository.getAllDesc();
+    }
+
+    @Override
     public Meter getLast() {
         return meterRepository.getLast();
     }

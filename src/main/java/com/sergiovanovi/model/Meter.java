@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Access(AccessType.FIELD)
@@ -18,7 +19,7 @@ public class Meter {
     private int id;
 
     @Column(name = "level")
-    private int level;
+    private double level;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "date_time", columnDefinition = "timestamp default now()")
@@ -40,7 +41,7 @@ public class Meter {
         return id;
     }
 
-    public int getLevel() {
+    public double getLevel() {
         return level;
     }
 
@@ -52,7 +53,7 @@ public class Meter {
         this.id = id;
     }
 
-    public void setLevel(int level) {
+    public void setLevel(double level) {
         this.level = level;
     }
 
@@ -65,7 +66,6 @@ public class Meter {
         return "Meter{" +
                 "id=" + id +
                 ", level=" + level +
-                ", dateTime=" + dateTime.toString().replace("T", " ") +
-                '}';
+                ", dateTime=" + dateTime.toString().replace("T", " ");
     }
 }
