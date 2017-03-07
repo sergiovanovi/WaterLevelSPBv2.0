@@ -4,7 +4,7 @@
     <title>Home</title>
 </head>
 <body>
-    <a href="meters">Meters</a>
+    <a href="profile">Profile</a>
     <a href="users">Users</a>
 </body>
 </html>

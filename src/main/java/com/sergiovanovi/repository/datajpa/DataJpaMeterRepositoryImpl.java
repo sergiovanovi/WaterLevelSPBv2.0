@@ -24,11 +24,6 @@ public class DataJpaMeterRepositoryImpl implements MeterRepository{
     }
 
     @Override
-    public Collection<Meter> getAllDesc() {
-        return crudMeterRepository.getAllDesc();
-    }
-
-    @Override
     public Meter getLast() {
         return crudMeterRepository.getLast();
     }

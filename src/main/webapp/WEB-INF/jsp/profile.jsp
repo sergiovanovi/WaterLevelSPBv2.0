@@ -18,19 +18,19 @@
             var arr = [];
             arr.push(['dayOfMonth', 'level']);
 
-            <c:forEach items="${metersForChart}" var="meter">
+            <c:forEach items="${meters}" var="meter">
                 arr.push([String(${meter.dateTime.dayOfMonth} + '.' + ${meter.dateTime.monthValue} + '.' + ${meter.dateTime.year} + ' ' + ${meter.dateTime.hour} + ':' + ${meter.dateTime.minute}), Number(${meter.level})]);
             </c:forEach>
 
             var data = google.visualization.arrayToDataTable(arr);
 
             var options = {
-                title: 'the water level in the river Neva St. Petersburg , in cm',
-                isStacked: true,
-                colors: ['blue']
+                title: 'Water level in the Neva River St. Petersburg for the last 10 days with an interval of 6 hours, in cm',
+                curveType: 'function',
+                legend: { position: 'bottom' }
             };
 
-            var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart_div'));
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
             chart.draw(data, options);
         }
     </script>
@@ -38,9 +38,11 @@
 </head>
 
 <body>
-<h2>Meter list over the last 30 days</h2>
+<h3>Current water level</h3>
+<p><c:out value="${lastMeter.level}"/></p>
 
-<div id="chart_div" style="width: 1000px; height: 500px;"></div>
+<h3>Water level graph</h3>
+<div id="chart_div" style="width: 1500px; height: 500px;"></div>
 
 </body>
 </html>

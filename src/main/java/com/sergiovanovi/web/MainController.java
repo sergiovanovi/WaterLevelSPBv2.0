@@ -1,14 +1,11 @@
 package com.sergiovanovi.web;
 
-import com.sergiovanovi.model.Meter;
 import com.sergiovanovi.service.MeterService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Collection;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -25,11 +22,11 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/meters")
+    @RequestMapping(value = "/profile")
     public String metersList(Model model){
-        model.addAttribute("metersForChart", meterService.getAll());
-        model.addAttribute("metersForTable", meterService.getAllDesc());
+        model.addAttribute("meters", meterService.getAll());
+        model.addAttribute("lastMeter", meterService.getLast());
         LOG.info("send to meters");
-        return "meters";
+        return "profile";
     }
 }

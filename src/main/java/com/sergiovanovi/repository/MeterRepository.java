@@ -8,11 +8,8 @@ public interface MeterRepository {
 
     Meter save(Meter meter);
 
-    //ORDERED dateTime
-    Collection<Meter> getAll();
-
     //ORDERED dateTime DESC
-    Collection<Meter> getAllDesc();
+    Collection<Meter> getAll();
 
     //get last meter
     Meter getLast();

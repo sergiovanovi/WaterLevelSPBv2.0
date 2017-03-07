@@ -20,28 +20,8 @@ public class MeterParser {
     private MeterService meterService;
     private static final Logger LOG = getLogger(MeterParser.class);
 
-    @Scheduled(fixedDelay = 3600000) //1hour
+    @Scheduled(fixedDelay = 18000000) //4hour
     public void parsMeter() {
-
-        Properties prop = new Properties();
-        InputStream input = null;
-        try {
-            input = new FileInputStream("util.properties");
-            prop.load(input);
-            LOG.info(prop.getProperty("url"));
-            LOG.info(prop.getProperty("line"));
-            LOG.info(prop.getProperty("startIndex"));
-        } catch (IOException ex) {
-            LOG.error("can not open a util.properties");
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    LOG.error("can not open a util.properties");
-                }
-            }
-        }
 
         LineNumberReader reader = null;
         try {

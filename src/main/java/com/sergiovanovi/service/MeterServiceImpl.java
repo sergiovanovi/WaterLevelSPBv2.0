@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class MeterServiceImpl implements MeterService{
@@ -22,12 +24,9 @@ public class MeterServiceImpl implements MeterService{
 
     @Override
     public Collection<Meter> getAll() {
-        return meterRepository.getAll();
-    }
-
-    @Override
-    public Collection<Meter> getAllDesc() {
-        return meterRepository.getAllDesc();
+        List<Meter> meters = (List<Meter>) meterRepository.getAll();
+        Collections.reverse(meters);
+        return meters;
     }
 
     @Override
