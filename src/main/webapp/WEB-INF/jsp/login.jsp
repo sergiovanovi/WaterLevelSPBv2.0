@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login in WaterLevelSPB</title>
 </head>
 <body>
 <div class="container" style="width: 300px;">

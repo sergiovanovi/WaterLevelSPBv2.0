@@ -40,4 +40,11 @@ public class MainController {
     public String loginPage(Model model) {
         return "login";
     }
+
+    @RequestMapping(value = {"/users"})
+    public String usersList(Model model) {
+        model.addAttribute("users", userService.getAll());
+        LOG.info("send to users");
+        return "profile";
+    }
 }

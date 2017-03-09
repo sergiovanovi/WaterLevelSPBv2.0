@@ -17,14 +17,14 @@
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
             var arr = [];
-            arr.push(['dayOfMonth', 'level']);
+            arr.push(['dayOfMonth', 'level', 'min', 'max']);
 
             <c:forEach items="${meters}" var="meter">
                 arr.push([String(${meter.dateTime.dayOfMonth}
                     + '.' + ${meter.dateTime.monthValue}
                     + '.' + ${meter.dateTime.year}
                     + ' ' + ${meter.dateTime.hour}
-                    + 'h'), Number(${meter.level})]);
+                    + 'h'), Number(${meter.level}), Number(${user.min}), Number(${user.max})]);
             </c:forEach>
 
             var data = google.visualization.arrayToDataTable(arr);
