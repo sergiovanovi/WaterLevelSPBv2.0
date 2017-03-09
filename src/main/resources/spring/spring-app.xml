@@ -8,7 +8,6 @@
     <context:annotation-config/>
     <context:component-scan base-package="com.sergiovanovi.service"/>
     <task:annotation-driven/>
-    <bean id="metersParser" class="com.sergiovanovi.util.MeterParser"/>
-    <!--<bean id="mailSender" class="com.sergiovanovi.util.MailSender"/>-->
+    <bean id="meterParserAndMailSender" class="com.sergiovanovi.util.MeterParserAndMailSender"/>
 
 </beans>

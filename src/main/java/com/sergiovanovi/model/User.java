@@ -29,20 +29,21 @@ public class User {
     private String email;
 
     @NotBlank
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "enabled", columnDefinition = "bool default true")
     private boolean enabled;
 
-    @Column(name = "min")
-    private int min;
+    @Column(name = "min", nullable = false)
+    private double min;
 
-    @Column(name = "max")
-    private int max;
+    @Column(name = "max", nullable = false)
+    private double max;
 
-    @Column(name = "message")
-    private String message;
+    //util == 0 - within normal meters, util > 0 (default 1)- above the norm meters, util < 0 (default -1)- less than the norm meters
+    @Column(name = "util", nullable = false)
+    private int util;
 
     @Enumerated(EnumType.STRING)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "email"))
@@ -60,18 +61,18 @@ public class User {
         this.enabled = true;
         this.min = min;
         this.max = max;
-        this.message = "";
+        this.util = 0;
         this.roles = roles;
     }
 
-    public User(String name, String email, String password, int min, int max, String message) {
+    public User(String name, String email, String password, int min, int max) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.enabled = true;
         this.min = min;
         this.max = max;
-        this.message = message;
+        this.util = 0;
         this.roles = Collections.emptySet();
     }
 
@@ -95,16 +96,16 @@ public class User {
         return enabled;
     }
 
-    public int getMin() {
+    public double getMin() {
         return min;
     }
 
-    public int getMax() {
+    public double getMax() {
         return max;
     }
 
-    public String getMessage() {
-        return message;
+    public int getUtil() {
+        return util;
     }
 
     public Set<Role> getRoles() {
@@ -131,16 +132,16 @@ public class User {
         this.enabled = enabled;
     }
 
-    public void setMin(int min) {
+    public void setMin(double min) {
         this.min = min;
     }
 
-    public void setMax(int max) {
+    public void setMax(double max) {
         this.max = max;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setUtil(int util) {
+        this.util = util;
     }
 
     public void setRoles(Set<Role> roles) {
@@ -157,7 +158,7 @@ public class User {
                 ", enabled=" + enabled +
                 ", min=" + min +
                 ", max=" + max +
-                ", message='" + message + '\'' +
+                ", util=" + util +
                 ", roles=" + roles +
                 '}';
     }

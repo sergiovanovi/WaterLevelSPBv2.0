@@ -11,7 +11,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @Controller
 public class MainController {
-    private static final Logger LOG = getLogger(MainController.class);
+    private static final Logger LOG = getLogger("application");
 
     @Autowired
     private MeterService meterService;

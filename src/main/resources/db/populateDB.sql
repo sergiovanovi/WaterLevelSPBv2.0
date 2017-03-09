@@ -4,17 +4,17 @@ DELETE FROM meters;
 DELETE FROM users;
 
 -- user
-INSERT INTO users (name, email, password, min, max, message)
-VALUES ('User', 'user@yandex.ru', '123123', -40, 30, 'greetings from user');
+INSERT INTO users (name, email, password, min, max, util)
+VALUES ('User', 'sergiovanovi@mail.ru', '123123', -5, 5, 0);
 
 -- admin
-INSERT INTO users (name, email, password, min, max, message)
-VALUES ('Admin', 'admin@gmail.com', '123456', -10, 10, 'greetings from admin');
+INSERT INTO users (name, email, password, min, max, util)
+VALUES ('Admin', 'inbox@sergiovanovi.com', '123456', -10, 10, 0);
 
 INSERT INTO user_roles (email, role) VALUES
-  ('user@yandex.ru', 'ROLE_USER'),
-  ('admin@gmail.com', 'ROLE_ADMIN'),
-  ('admin@gmail.com', 'ROLE_USER');
+  ('sergiovanovi@mail.ru', 'ROLE_USER'),
+  ('inbox@sergiovanovi.com', 'ROLE_ADMIN'),
+  ('inbox@sergiovanovi.com', 'ROLE_USER');
 
 INSERT INTO meters (level, date_time) VALUES
   ('0', '2017-03-1 10:00:00'),

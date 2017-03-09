@@ -7,9 +7,9 @@ CREATE TABLE users (
   name     VARCHAR(45) NOT NULL,
   email    VARCHAR(45) NOT NULL,
   password VARCHAR(45) NOT NULL,
-  min      INT         NOT NULL,
-  max      INT         NOT NULL,
-  message  VARCHAR(45) NOT NULL,
+  min      DOUBLE      NOT NULL,
+  max      DOUBLE      NOT NULL,
+  util     INT         NOT NULL,
   enabled  BIT(1)      NOT NULL DEFAULT TRUE,
   PRIMARY KEY (id),
   UNIQUE INDEX id_UNIQUE (id ASC),
@@ -21,7 +21,7 @@ CREATE UNIQUE INDEX users_unique_id_email_idx
 
 CREATE TABLE meters (
   id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  level     DOUBLE          NOT NULL,
+  level     DOUBLE       NOT NULL,
   date_time TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 );
