@@ -56,10 +56,6 @@
         <td><c:out value="${lastMeter.level}"/></td>
     </tr>
     <tr>
-        <td>Current level</td>
-        <td><c:out value="${lastMeter.level}"/></td>
-    </tr>
-    <tr>
         <td>Current login</td>
         <td><sec:authentication property="principal.username"/> <a class="btn btn-lg btn-danger" href="<c:url value="/logout"/>" role="button">Logout</a></td>
     </tr>
