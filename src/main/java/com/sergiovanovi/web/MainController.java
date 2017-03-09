@@ -24,10 +24,10 @@ public class MainController {
     @RequestMapping("/")
     public String home(Model model) {
         LOG.info("send to profile");
-        return "index";
+        return "redirect:/profile";
     }
 
-    @RequestMapping(value = {"/profile"})
+    @RequestMapping(value = "/profile")
     public String metersList(Model model) {
         model.addAttribute("meters", meterService.getAll());
         model.addAttribute("lastMeter", meterService.getLast());

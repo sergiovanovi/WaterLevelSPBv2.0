@@ -8,7 +8,11 @@
 <html>
 
 <head>
-    <title>Profile</title>
+    <title>
+        <c:if test="${user.util == 0}">Within the specified limits</c:if>
+        <c:if test="${user.util > 0}">Above the specified limits</c:if>
+        <c:if test="${user.util < 0}">Below the specified limits</c:if>
+    </title>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -47,6 +51,10 @@
 <div id="chart_div" style="width: 1500px; height: 500px;"></div>
 
 <table>
+    <tr>
+        <td>Current level</td>
+        <td><c:out value="${lastMeter.level}"/></td>
+    </tr>
     <tr>
         <td>Current level</td>
         <td><c:out value="${lastMeter.level}"/></td>

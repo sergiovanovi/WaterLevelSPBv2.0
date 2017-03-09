@@ -50,7 +50,7 @@ public class MeterParserAndMailSender {
                         meter.setDateTime(LocalDateTime.now());
                         meter.setLevel(waterLevel);
                         meterService.save(meter);
-                        //checkMeter(waterLevel);
+                        checkMeter(waterLevel);
                         break;
                     }
                     stringMeter = reader.readLine();
