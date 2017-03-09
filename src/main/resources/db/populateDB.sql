@@ -5,11 +5,11 @@ DELETE FROM users;
 
 -- user
 INSERT INTO users (name, email, password, min, max, util)
-VALUES ('User', 'sergiovanovi@mail.ru', '123123', -5, 5, 0);
+VALUES ('User', 'sergiovanovi@mail.ru', '$2a$10$0P4JB2CNMEIodboE7xnnzOQ5.ngroEgHAWp0pSU7spFno8kHLlZ/i', -5, 5, 0);
 
 -- admin
 INSERT INTO users (name, email, password, min, max, util)
-VALUES ('Admin', 'inbox@sergiovanovi.com', '123456', -10, 10, 0);
+VALUES ('Admin', 'inbox@sergiovanovi.com', '$2a$10$3A9Tu7JgdXWaOF.zmjZNje4XDj7Ngw9EyY1DhU8rwWL8huBY67LzW', -10, 10, 0);
 
 INSERT INTO user_roles (email, role) VALUES
   ('sergiovanovi@mail.ru', 'ROLE_USER'),

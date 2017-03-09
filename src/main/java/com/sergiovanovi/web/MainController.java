@@ -1,6 +1,8 @@
 package com.sergiovanovi.web;
 
+import com.sergiovanovi.AuthorizedUser;
 import com.sergiovanovi.service.MeterService;
+import com.sergiovanovi.service.UserService;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,17 +18,26 @@ public class MainController {
     @Autowired
     private MeterService meterService;
 
+    @Autowired
+    private UserService userService;
+
     @RequestMapping("/")
-    public String home(Model model){
-        LOG.info("send to index");
+    public String home(Model model) {
+        LOG.info("send to profile");
         return "index";
     }
 
-    @RequestMapping(value = "/profile")
-    public String metersList(Model model){
+    @RequestMapping(value = {"/profile"})
+    public String metersList(Model model) {
         model.addAttribute("meters", meterService.getAll());
         model.addAttribute("lastMeter", meterService.getLast());
+        model.addAttribute("user", userService.getByEmail(AuthorizedUser.get().getUsername()));
         LOG.info("send to meters");
         return "profile";
+    }
+
+    @RequestMapping(value = "/login")
+    public String loginPage(Model model) {
+        return "login";
     }
 }

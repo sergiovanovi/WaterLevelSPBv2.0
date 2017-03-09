@@ -4,9 +4,9 @@ USE wlspb;
 
 CREATE TABLE users (
   id       INT         NOT NULL AUTO_INCREMENT,
-  name     VARCHAR(45) NOT NULL,
-  email    VARCHAR(45) NOT NULL,
-  password VARCHAR(45) NOT NULL,
+  name     VARCHAR(128) NOT NULL,
+  email    VARCHAR(128) NOT NULL,
+  password VARCHAR(128) NOT NULL,
   min      DOUBLE      NOT NULL,
   max      DOUBLE      NOT NULL,
   util     INT         NOT NULL,
@@ -31,8 +31,8 @@ CREATE UNIQUE INDEX meters_unique_id_datetime_idx
 
 
 CREATE TABLE user_roles (
-  email VARCHAR(45) NOT NULL,
-  role  VARCHAR(45),
+  email VARCHAR(128) NOT NULL,
+  role  VARCHAR(128),
   CONSTRAINT user_roles_idx UNIQUE (email, role),
   FOREIGN KEY (email) REFERENCES users (email)
     ON DELETE CASCADE

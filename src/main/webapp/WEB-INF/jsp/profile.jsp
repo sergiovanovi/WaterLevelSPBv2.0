@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html>
 
@@ -50,6 +51,19 @@
         <td>Current level</td>
         <td><c:out value="${lastMeter.level}"/></td>
     </tr>
+    <tr>
+        <td>Current login</td>
+        <td><sec:authentication property="principal.username"/> <a class="btn btn-lg btn-danger" href="<c:url value="/logout"/>" role="button">Logout</a></td>
+    </tr>
+    <tr>
+        <td>Min level</td>
+        <td><c:out value="${user.min}"/></td>
+    </tr>
+    <tr>
+        <td>Max level</td>
+        <td><c:out value="${user.max}"/></td>
+    </tr>
+
 </table>
 
 </body>
