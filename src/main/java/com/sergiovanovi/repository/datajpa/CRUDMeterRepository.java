@@ -17,7 +17,8 @@ public interface CRUDMeterRepository extends JpaRepository<Meter, Integer>{
     @Query(value = "SELECT * FROM wlspb.meters ORDER BY date_time DESC LIMIT 1", nativeQuery = true)
     Meter getLast();
 
-    @Query(value = "SELECT * FROM wlspb.meters ORDER BY date_time DESC LIMIT 60", nativeQuery = true)
+    //last 7 days 84
+    @Query(value = "SELECT * FROM wlspb.meters ORDER BY date_time DESC LIMIT 84", nativeQuery = true)
     List<Meter> getAll();
 
     @Override

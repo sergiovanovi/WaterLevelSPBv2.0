@@ -31,7 +31,7 @@ public class MeterParserAndMailSender {
 
     private static final Logger LOG = getLogger("application");
 
-    @Scheduled(fixedDelay = 18000000) //4hour
+    @Scheduled(fixedDelay = 7200000) //2hour
     public void parsMeter() {
 
         LineNumberReader reader = null;

@@ -34,7 +34,7 @@
             var data = google.visualization.arrayToDataTable(arr);
 
             var options = {
-                title: 'Water level in the Neva River St. Petersburg for the last 10 days with an interval of 4 hours, in cm',
+                title: 'Water level in the Neva River St. Petersburg for the last 7 days with an interval of 4 hours, in cm',
                 curveType: 'function',
                 legend: { position: 'bottom' }
             };
