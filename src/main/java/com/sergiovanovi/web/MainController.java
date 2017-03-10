@@ -1,6 +1,7 @@
 package com.sergiovanovi.web;
 
 import com.sergiovanovi.AuthorizedUser;
+import com.sergiovanovi.model.User;
 import com.sergiovanovi.service.MeterService;
 import com.sergiovanovi.service.UserService;
 import org.slf4j.Logger;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 
@@ -24,7 +27,7 @@ public class MainController {
     private UserService userService;
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
         LOG.info(LocalDateTime.now() + " Send to profile");
         return "redirect:/profile";
     }
@@ -33,13 +36,23 @@ public class MainController {
     public String metersList(Model model) {
         model.addAttribute("meters", meterService.getAll());
         model.addAttribute("lastMeter", meterService.getLast());
-        model.addAttribute("user", userService.getByEmail(AuthorizedUser.get().getUsername()));
+        model.addAttribute("user", userService.getByEmail(AuthorizedUser.email()));
         LOG.info(LocalDateTime.now() + " Send to meters");
         return "profile";
     }
 
+    @PostMapping("/profile")
+    public String save(@ModelAttribute("max") double max, @ModelAttribute("min") double min) {
+        User user = userService.getByEmail(AuthorizedUser.email());
+        user.setMin(min);
+        user.setMax(max);
+        userService.save(user);
+        LOG.info(LocalDateTime.now() + " New limits saved");
+        return "redirect:/";
+    }
+
     @GetMapping("/login")
-    public String loginPage(Model model) {
+    public String loginPage() {
         return "login";
     }
 
