@@ -56,16 +56,16 @@ public class MeterParserAndMailSender {
                     stringMeter = reader.readLine();
                 }
             } catch (IOException e) {
-                LOG.error("can not open a stream");
+                LOG.error(LocalDateTime.now() + " Can not open a stream ");
             } finally {
                 if (reader != null) try {
                     reader.close();
                 } catch (IOException e) {
-                    LOG.error("can not close a stream");
+                    LOG.error(LocalDateTime.now() + " Can not close a stream");
                 }
             }
         } catch (MalformedURLException e) {
-            LOG.error("web-site does not respond");
+            LOG.error(LocalDateTime.now() + " Web-site does not respond");
         }
     }
 
@@ -84,27 +84,27 @@ public class MeterParserAndMailSender {
                     sendEmail(email, "The water level in the port of St. Petersburg is higher than " + user.getMax(), meter);
                     user.setUtil(3);
                     userService.save(user);
-                    LOG.info("Send email successfully");
+                    LOG.info(LocalDateTime.now() + " Send email successfully");
                 } catch (javax.mail.MessagingException e) {
-                    LOG.error("Sending email fail");
+                    LOG.error(LocalDateTime.now() + " Sending email fail");
                 }
             } else if (meter < min && util != -1) {
                 try {
                     sendEmail(email, "The water level in the port of St. Petersburg is below " + user.getMin(), meter);
                     user.setUtil(1);
                     userService.save(user);
-                    LOG.info("Send email successfully");
+                    LOG.info(LocalDateTime.now() + " Send email successfully");
                 } catch (javax.mail.MessagingException e) {
-                    LOG.error("Sending email fail");
+                    LOG.error(LocalDateTime.now() + " Sending email fail");
                 }
             } else if (meter <= max && meter >= min && util != 0) {
                 try {
                     sendEmail(email, "The water level in the port of St. Petersburg ranges from " + user.getMin() + " to " + user.getMax(), meter);
                     user.setUtil(2);
                     userService.save(user);
-                    LOG.info("Send email successfully");
+                    LOG.info(LocalDateTime.now() + " Send email successfully");
                 } catch (javax.mail.MessagingException e) {
-                    LOG.error("Sending email fail");
+                    LOG.error(LocalDateTime.now() + " Sending email fail");
                 }
             }
         }

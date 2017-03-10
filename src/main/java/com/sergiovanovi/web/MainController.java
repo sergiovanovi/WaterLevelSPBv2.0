@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDateTime;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Controller
@@ -24,7 +26,7 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home(Model model) {
-        LOG.info("send to profile");
+        LOG.info(LocalDateTime.now() + " Send to profile");
         return "redirect:/profile";
     }
 
@@ -33,7 +35,7 @@ public class MainController {
         model.addAttribute("meters", meterService.getAll());
         model.addAttribute("lastMeter", meterService.getLast());
         model.addAttribute("user", userService.getByEmail(AuthorizedUser.get().getUsername()));
-        LOG.info("send to meters");
+        LOG.info(LocalDateTime.now() + " Send to meters");
         return "profile";
     }
 
@@ -45,7 +47,7 @@ public class MainController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String usersList(Model model) {
         model.addAttribute("users", userService.getAll());
-        LOG.info("send to users");
+        LOG.info(LocalDateTime.now() + " Send to users");
         return "profile";
     }
 }
