@@ -7,8 +7,7 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.time.LocalDateTime;
 
@@ -24,13 +23,13 @@ public class MainController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public String home(Model model) {
         LOG.info(LocalDateTime.now() + " Send to profile");
         return "redirect:/profile";
     }
 
-    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    @GetMapping("/profile")
     public String metersList(Model model) {
         model.addAttribute("meters", meterService.getAll());
         model.addAttribute("lastMeter", meterService.getLast());
@@ -39,12 +38,12 @@ public class MainController {
         return "profile";
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    @GetMapping("/login")
     public String loginPage(Model model) {
         return "login";
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @GetMapping("/users")
     public String usersList(Model model) {
         model.addAttribute("users", userService.getAll());
         LOG.info(LocalDateTime.now() + " Send to users");

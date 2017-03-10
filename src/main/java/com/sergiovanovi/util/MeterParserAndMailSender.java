@@ -51,6 +51,7 @@ public class MeterParserAndMailSender {
                         meter.setLevel(waterLevel);
                         meterService.save(meter);
                         checkMeter(waterLevel);
+                        LOG.info(LocalDateTime.now() + " Measurement is read and verified");
                         break;
                     }
                     stringMeter = reader.readLine();
@@ -82,7 +83,7 @@ public class MeterParserAndMailSender {
             if (meter > max && util != 1) {
                 try {
                     sendEmail(email, "The water level in the port of St. Petersburg is higher than " + user.getMax(), meter);
-                    user.setUtil(3);
+                    user.setUtil(1);
                     userService.save(user);
                     LOG.info(LocalDateTime.now() + " Send email successfully");
                 } catch (javax.mail.MessagingException e) {
@@ -91,7 +92,7 @@ public class MeterParserAndMailSender {
             } else if (meter < min && util != -1) {
                 try {
                     sendEmail(email, "The water level in the port of St. Petersburg is below " + user.getMin(), meter);
-                    user.setUtil(1);
+                    user.setUtil(-1);
                     userService.save(user);
                     LOG.info(LocalDateTime.now() + " Send email successfully");
                 } catch (javax.mail.MessagingException e) {
@@ -100,7 +101,7 @@ public class MeterParserAndMailSender {
             } else if (meter <= max && meter >= min && util != 0) {
                 try {
                     sendEmail(email, "The water level in the port of St. Petersburg ranges from " + user.getMin() + " to " + user.getMax(), meter);
-                    user.setUtil(2);
+                    user.setUtil(0);
                     userService.save(user);
                     LOG.info(LocalDateTime.now() + " Send email successfully");
                 } catch (javax.mail.MessagingException e) {
