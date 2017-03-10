@@ -86,7 +86,7 @@ public class MeterParserAndMailSender {
                     user.setUtil(1);
                     userService.save(user);
                     LOG.info(LocalDateTime.now() + " Send email successfully");
-                } catch (javax.mail.MessagingException e) {
+                } catch (MessagingException e) {
                     LOG.error(LocalDateTime.now() + " Sending email fail");
                 }
             } else if (meter < min && util != -1) {
@@ -95,7 +95,7 @@ public class MeterParserAndMailSender {
                     user.setUtil(-1);
                     userService.save(user);
                     LOG.info(LocalDateTime.now() + " Send email successfully");
-                } catch (javax.mail.MessagingException e) {
+                } catch (MessagingException e) {
                     LOG.error(LocalDateTime.now() + " Sending email fail");
                 }
             } else if (meter <= max && meter >= min && util != 0) {
@@ -104,14 +104,14 @@ public class MeterParserAndMailSender {
                     user.setUtil(0);
                     userService.save(user);
                     LOG.info(LocalDateTime.now() + " Send email successfully");
-                } catch (javax.mail.MessagingException e) {
+                } catch (MessagingException e) {
                     LOG.error(LocalDateTime.now() + " Sending email fail");
                 }
             }
         }
     }
 
-    public void sendEmail(String email, String message, double meter) throws javax.mail.MessagingException {
+    public void sendEmail(String email, String message, double meter) throws MessagingException {
         String from = "waterlevelinfospb@mail.ru";
         String to = email;
         String username = "waterlevelinfospb@mail.ru";
