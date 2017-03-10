@@ -13,6 +13,7 @@
         <c:if test="${user.util > 0}">Above the specified limits</c:if>
         <c:if test="${user.util < 0}">Below the specified limits</c:if>
     </title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -57,7 +58,7 @@
     </tr>
     <tr>
         <td>Current login</td>
-        <td><sec:authentication property="principal.username"/> <a class="btn btn-lg btn-danger" href="<c:url value="/logout"/>" role="button">Logout</a></td>
+        <td><sec:authentication property="principal.username"/> <a class="btn btn-xs btn-danger" href="<c:url value="/logout"/>" role="button">Logout</a></td>
     </tr>
     <tr>
         <td>Min level</td>
@@ -67,7 +68,6 @@
         <td>Max level</td>
         <td><c:out value="${user.max}"/></td>
     </tr>
-
 </table>
 
 </body>
