@@ -135,7 +135,7 @@ public class MeterParserAndMailSender {
         mimeMessage.setFrom(new InternetAddress(from));
         mimeMessage.addRecipients(Message.RecipientType.TO, to);
         mimeMessage.setSubject(message);
-        mimeMessage.setText(message + ".\n" + "Current level " + meter + " cm." + "\n" + "More info here http://www.pasp.ru/op-info-weather?mode=current");
+        mimeMessage.setText("Current level " + meter + " cm." + "\n"+ message + ".\n" + "More info here http://www.pasp.ru/op-info-weather?mode=current");
         Transport.send(mimeMessage);
     }
 }
