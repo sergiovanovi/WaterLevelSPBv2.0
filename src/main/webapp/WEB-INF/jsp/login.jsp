@@ -13,6 +13,7 @@
         <input type="text" class="form-control" name="username" placeholder="Email address" required autofocus>
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        <span style="color: red; " ><c:if test="${!empty error}"><c:out value="${error}"/></c:if></span>
     </form>
 </div>
 </body>

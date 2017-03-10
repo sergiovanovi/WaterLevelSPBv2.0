@@ -52,7 +52,8 @@ public class MainController {
     }
 
     @GetMapping("/login")
-    public String loginPage() {
+    public String loginPage(@ModelAttribute("error") String hasError, Model model) {
+        if (hasError.equals("true")) model.addAttribute("error", "Invalid login and password");
         return "login";
     }
 
