@@ -37,7 +37,7 @@ public class MainController {
         model.addAttribute("meters", meterService.getAll());
         model.addAttribute("lastMeter", meterService.getLast());
         model.addAttribute("user", userService.getByEmail(AuthorizedUser.email()));
-        LOG.info(LocalDateTime.now() + " Send to meters");
+        LOG.info(LocalDateTime.now() + " Send to profile");
         return "profile";
     }
 
