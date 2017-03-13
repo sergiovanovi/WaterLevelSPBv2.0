@@ -24,7 +24,9 @@ public class MeterServiceImpl implements MeterService{
 
     @Override
     public Collection<Meter> getAll() {
-        return  meterRepository.getAll();
+        List<Meter> meters = (List<Meter>) meterRepository.getAll();
+        Collections.reverse(meters);
+        return meters;
     }
 
     @Override

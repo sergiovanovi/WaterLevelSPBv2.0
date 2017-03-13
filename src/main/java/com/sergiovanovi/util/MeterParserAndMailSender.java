@@ -41,7 +41,7 @@ public class MeterParserAndMailSender {
                 reader = new LineNumberReader(new InputStreamReader(url.openStream()));
                 String stringMeter = reader.readLine();
 
-                //TODO Make it easier
+                //TODO Make it easier and ask the measurement provider for a direct link
                 while (stringMeter != null) {
                     if (reader.getLineNumber() == 184) {
                         stringMeter = stringMeter.trim();
@@ -58,12 +58,14 @@ public class MeterParserAndMailSender {
                     stringMeter = reader.readLine();
                 }
             } catch (IOException e) {
-                LOG.error(LocalDateTime.now() + " Can not open a stream ");
+                LOG.error(LocalDateTime.now() + " Can not open a stream");
             } finally {
-                if (reader != null) try {
-                    reader.close();
-                } catch (IOException e) {
-                    LOG.error(LocalDateTime.now() + " Can not close a stream");
+                if (reader != null) {
+                    try {
+                        reader.close();
+                    } catch (IOException e) {
+                        LOG.error(LocalDateTime.now() + " Can not close a stream");
+                    }
                 }
             }
         } catch (MalformedURLException e) {
@@ -72,48 +74,32 @@ public class MeterParserAndMailSender {
     }
 
     public void checkMeter(double level) {
-        double meter = level;
-        List<User> listUsers = (List<User>) userService.getAll();
+        String successEmail = " Send email successfully";
 
+        List<User> listUsers = (List<User>) userService.getAll();
         for (User user : listUsers) {
             int util = user.getUtil();
             double min = user.getMin();
             double max = user.getMax();
             String email = user.getEmail();
 
-            //TODO Make it easier
-            if (meter > max && util != 1) {
-                try {
-                    sendEmail(email, "The water level in the port of St. Petersburg is higher than " + user.getMax(), meter);
-                    user.setUtil(1);
-                    userService.save(user);
-                    LOG.info(LocalDateTime.now() + " Send email successfully");
-                } catch (MessagingException e) {
-                    LOG.error(LocalDateTime.now() + " Sending email fail");
-                }
-            } else if (meter < min && util != -1) {
-                try {
-                    sendEmail(email, "The water level in the port of St. Petersburg is below " + user.getMin(), meter);
-                    user.setUtil(-1);
-                    userService.save(user);
-                    LOG.info(LocalDateTime.now() + " Send email successfully");
-                } catch (MessagingException e) {
-                    LOG.error(LocalDateTime.now() + " Sending email fail");
-                }
-            } else if (meter <= max && meter >= min && util != 0) {
-                try {
-                    sendEmail(email, "The water level in the port of St. Petersburg ranges from " + user.getMin() + " to " + user.getMax(), meter);
-                    user.setUtil(0);
-                    userService.save(user);
-                    LOG.info(LocalDateTime.now() + " Send email successfully");
-                } catch (MessagingException e) {
-                    LOG.error(LocalDateTime.now() + " Sending email fail");
-                }
+            if (level > max && util != 1 && sendEmail(email, "The water level in the port of St. Petersburg is higher than " + user.getMax(), level)) {
+                user.setUtil(1);
+                userService.save(user);
+                LOG.info(LocalDateTime.now() + successEmail);
+            } else if (level < min && util != -1 && sendEmail(email, "The water level in the port of St. Petersburg is below " + user.getMin(), level)) {
+                user.setUtil(-1);
+                userService.save(user);
+                LOG.info(LocalDateTime.now() + successEmail);
+            } else if (level <= max && level >= min && util != 0 && sendEmail(email, "The water level in the port of St. Petersburg ranges from " + user.getMin() + " to " + user.getMax(), level)) {
+                user.setUtil(0);
+                userService.save(user);
+                LOG.info(LocalDateTime.now() + successEmail);
             }
         }
     }
 
-    public void sendEmail(String email, String message, double meter) throws MessagingException {
+    public boolean sendEmail(String email, String message, double meter) {
         String from = "waterlevelinfospb@mail.ru";
         String to = email;
         String username = "waterlevelinfospb@mail.ru";
@@ -134,10 +120,16 @@ public class MeterParserAndMailSender {
         });
 
         MimeMessage mimeMessage = new MimeMessage(session);
-        mimeMessage.setFrom(new InternetAddress(from));
-        mimeMessage.addRecipients(Message.RecipientType.TO, to);
-        mimeMessage.setSubject(message);
-        mimeMessage.setText("Current level " + meter + " cm." + "\n"+ message + ".\n" + "More info here http://www.pasp.ru/op-info-weather?mode=current");
-        Transport.send(mimeMessage);
+        try {
+            mimeMessage.setFrom(new InternetAddress(from));
+            mimeMessage.addRecipients(Message.RecipientType.TO, to);
+            mimeMessage.setSubject(message);
+            mimeMessage.setText("Current level " + meter + " cm." + "\n" + message + ".\n" + "More info here http://www.pasp.ru/op-info-weather?mode=current");
+            Transport.send(mimeMessage);
+            return true;
+        } catch (MessagingException e) {
+            LOG.info(LocalDateTime.now() + " Sending email failed");
+            return false;
+        }
     }
 }
