@@ -1,6 +1,7 @@
 package com.sergiovanovi.repository.datajpa;
 
 import com.sergiovanovi.model.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -13,7 +14,7 @@ import java.util.List;
 public interface CRUDUserRepository extends JpaRepository<User, Integer>{
 
     @Override
-    List<User> findAll();
+    List<User> findAll(Sort sort);
 
     @Override
     @Transactional

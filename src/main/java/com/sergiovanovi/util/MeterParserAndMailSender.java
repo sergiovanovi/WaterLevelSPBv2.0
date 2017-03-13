@@ -41,6 +41,7 @@ public class MeterParserAndMailSender {
                 reader = new LineNumberReader(new InputStreamReader(url.openStream()));
                 String stringMeter = reader.readLine();
 
+                //TODO Make it easier
                 while (stringMeter != null) {
                     if (reader.getLineNumber() == 184) {
                         stringMeter = stringMeter.trim();
@@ -75,11 +76,12 @@ public class MeterParserAndMailSender {
         List<User> listUsers = (List<User>) userService.getAll();
 
         for (User user : listUsers) {
-            double util = user.getUtil();
+            int util = user.getUtil();
             double min = user.getMin();
             double max = user.getMax();
             String email = user.getEmail();
 
+            //TODO Make it easier
             if (meter > max && util != 1) {
                 try {
                     sendEmail(email, "The water level in the port of St. Petersburg is higher than " + user.getMax(), meter);

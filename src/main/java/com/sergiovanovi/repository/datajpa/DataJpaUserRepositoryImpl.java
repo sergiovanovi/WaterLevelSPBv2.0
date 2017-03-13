@@ -3,12 +3,14 @@ package com.sergiovanovi.repository.datajpa;
 import com.sergiovanovi.model.User;
 import com.sergiovanovi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
 
 @Repository
 public class DataJpaUserRepositoryImpl implements UserRepository{
+    private static final Sort SORT_BY_EMAIL = new Sort("email");
 
     @Autowired
     private CRUDUserRepository crudUserRepository;
@@ -35,6 +37,6 @@ public class DataJpaUserRepositoryImpl implements UserRepository{
 
     @Override
     public Collection<User> getAll() {
-        return crudUserRepository.findAll();
+        return crudUserRepository.findAll(SORT_BY_EMAIL);
     }
 }
