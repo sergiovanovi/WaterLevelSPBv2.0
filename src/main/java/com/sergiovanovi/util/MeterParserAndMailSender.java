@@ -53,7 +53,7 @@ public class MeterParserAndMailSender {
                         meter.setLevel(waterLevel);
                         meterService.save(meter);
 
-                        checkMeter(waterLevel);
+                        //checkMeter(waterLevel);
                         LOG.info(LocalDateTime.now() + " Measurement is read and verified");
                         break;
                     }

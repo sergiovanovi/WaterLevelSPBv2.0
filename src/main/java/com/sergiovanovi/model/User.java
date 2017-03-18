@@ -22,10 +22,6 @@ public class User {
     @Column(name = "id", nullable = false)
     private int id;
 
-    @NotBlank
-    @Column(name = "name")
-    private String name;
-
     @Email
     @NotBlank
     @Column(name = "email", nullable = false, unique = true)
@@ -58,7 +54,6 @@ public class User {
     }
 
     public User(String email, String password, int min, int max, Set<Role> roles) {
-        this.name = "";
         this.email = email;
         this.password = password;
         this.enabled = true;
@@ -68,23 +63,8 @@ public class User {
         this.roles = roles;
     }
 
-    public User(String name, String email, String password, int min, int max) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.enabled = true;
-        this.min = min;
-        this.max = max;
-        this.util = 0;
-        this.roles = Collections.emptySet();
-    }
-
     public int getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getEmail() {
@@ -119,10 +99,6 @@ public class User {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
@@ -155,7 +131,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", enabled=" + enabled +

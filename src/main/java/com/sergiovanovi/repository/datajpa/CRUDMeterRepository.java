@@ -14,10 +14,10 @@ public interface CRUDMeterRepository extends JpaRepository<Meter, Integer>{
     @Transactional
     Meter save(Meter meter);
 
-    @Query(value = "SELECT * FROM wlspb.meters ORDER BY date_time DESC LIMIT 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM meters ORDER BY date_time DESC LIMIT 1", nativeQuery = true)
     Meter getLast();
 
     //last 7 days 84
-    @Query(value = "SELECT * FROM wlspb.meters ORDER BY date_time DESC LIMIT 84", nativeQuery = true)
+    @Query(value = "SELECT * FROM meters ORDER BY date_time DESC LIMIT 84", nativeQuery = true)
     List<Meter> getAll();
 }

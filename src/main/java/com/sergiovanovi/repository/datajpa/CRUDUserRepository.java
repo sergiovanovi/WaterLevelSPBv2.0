@@ -22,7 +22,7 @@ public interface CRUDUserRepository extends JpaRepository<User, Integer>{
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE u FROM wlspb.users u WHERE u.id=:id", nativeQuery = true)
+    @Query(value = "DELETE u FROM users u WHERE u.id=:id", nativeQuery = true)
     int delete(@Param("id") int id);
 
     @Override
