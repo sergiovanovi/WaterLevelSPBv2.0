@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
@@ -82,6 +83,41 @@ public class MainController {
     public String usersList(Model model) {
         model.addAttribute("users", userService.getAll());
         LOG.info(LocalDateTime.now() + " Send to users");
-        return "profile";
+        return "users";
+    }
+
+    @PostMapping("/users")
+    public String editUser(@ModelAttribute("email") String email, @ModelAttribute("enabled") String enabled,
+                           @ModelAttribute("min") double min, @ModelAttribute("max") double max,
+                           @ModelAttribute("util") int util, Model model) {
+        boolean enabl = false;
+        if (enabled.equals("true")) enabl = true;
+        User user = userService.getByEmail(email);
+        if (user != null) {
+            user.setMin(min);
+            user.setMax(max);
+            user.setUtil(util);
+            user.setEnabled(enabl);
+            if (userService.save(user) != null) {
+                LOG.info(LocalDateTime.now() + " Edit user: " + email);
+            } else {
+                LOG.error(LocalDateTime.now() + " Can not find user with email: " + email);
+            }
+        }
+        model.addAttribute("users", userService.getAll());
+        LOG.info(LocalDateTime.now() + " Send to users");
+        return "users";
+    }
+
+    @GetMapping("/users/{id}")
+    public String deleteUser(@PathVariable("id") int id, Model model) {
+        if (userService.delete(id)){
+            LOG.info(LocalDateTime.now() + " Delete user with id:" + id);
+        } else {
+            LOG.error(LocalDateTime.now() + " Can not delete user with id:" + id);
+        }
+        model.addAttribute("users", userService.getAll());
+        LOG.info(LocalDateTime.now() + " Send to users");
+        return "users";
     }
 }

@@ -57,6 +57,10 @@
                 <a class="btn btn-xs btn-danger" href="<c:url value="/logout"/>" role="button">Logout</a>
             </td>
         </tr>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <tr>Users</tr>
+            <tr><input class="btn btn-xs btn-danger" onclick="location.href ='${pageContext.request.contextPath}/users'" value="Users"/></tr>
+        </sec:authorize>
         <tr>
             <td>Current level</td>
             <td><c:out value="${lastMeter.level}"/></td>

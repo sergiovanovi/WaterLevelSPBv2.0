@@ -3,18 +3,20 @@ DELETE FROM user_roles;
 DELETE FROM meters;
 DELETE FROM users;
 
--- user
-INSERT INTO users (email, password, min, max, util, enabled)
-VALUES ('sergiovanovi@mail.ru', '$2a$10$0P4JB2CNMEIodboE7xnnzOQ5.ngroEgHAWp0pSU7spFno8kHLlZ/i', -5, 5, 0, TRUE);
 
+INSERT INTO users (email, password, min, max, util, enabled) VALUES
+-- user
+('sergiovanovi@mail.ru', '$2a$10$0P4JB2CNMEIodboE7xnnzOQ5.ngroEgHAWp0pSU7spFno8kHLlZ/i', -5, 5, 0, TRUE),
 -- admin
-INSERT INTO users (email, password, min, max, util, enabled)
-VALUES ('inbox@sergiovanovi.com', '$2a$10$3A9Tu7JgdXWaOF.zmjZNje4XDj7Ngw9EyY1DhU8rwWL8huBY67LzW', -10, 10, 0, TRUE);
+('inbox@sergiovanovi.com', '$2a$10$3A9Tu7JgdXWaOF.zmjZNje4XDj7Ngw9EyY1DhU8rwWL8huBY67LzW', -10, 10, 0, TRUE),
+-- disabled admin
+('tatana-89@mail.ru', '$2a$10$0P4JB2CNMEIodboE7xnnzOQ5.ngroEgHAWp0pSU7spFno8kHLlZ/i', -10, 10, 0, FALSE );
 
 INSERT INTO user_roles (email, role) VALUES
   ('sergiovanovi@mail.ru', 'ROLE_USER'),
   ('inbox@sergiovanovi.com', 'ROLE_ADMIN'),
-  ('inbox@sergiovanovi.com', 'ROLE_USER');
+  ('inbox@sergiovanovi.com', 'ROLE_USER'),
+  ('tatana-89@mail.ru', 'ROLE_ADMIN');
 
 INSERT INTO meters (level, date_time) VALUES
   ('0', '2017-03-1 10:00:00'),
