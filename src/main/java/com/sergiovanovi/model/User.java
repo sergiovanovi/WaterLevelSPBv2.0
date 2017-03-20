@@ -56,7 +56,7 @@ public class User {
     public User(String email, String password, int min, int max, Set<Role> roles) {
         this.email = email;
         this.password = password;
-        this.enabled = true;
+        this.enabled = false;
         this.min = min;
         this.max = max;
         this.util = 0;

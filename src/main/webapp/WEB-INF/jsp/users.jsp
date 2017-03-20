@@ -3,8 +3,7 @@
 <html>
 <head>
     <title>Users</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
+    <jsp:include page="headTag.jsp"/>
 </head>
 <body>
 <table>
@@ -31,7 +30,7 @@
                 <td><input name="min" type="number" step="0.1" value="${user.min}"/></td>
                 <td><input name="max" type="number" step="0.1" value="${user.max}"/></td>
                 <td><input name="util" type="number" min="-1" max="1" value="${user.util}"/></td>
-                <td><input class="btn btn-xs btn-danger" type="submit" value="Save"/></td>
+                <td><input class="btn btn-xs btn-success" type="submit" value="Save"/></td>
                 <td><input class="btn btn-xs btn-danger" onclick="location.href ='${pageContext.request.contextPath}/users/${user.id}'" value="Delete"/></td>
             </tr>
         </form>

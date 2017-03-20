@@ -52,6 +52,7 @@ public class MainController {
         User tryUser = userService.getByEmail(username);
         if (tryUser == null) {
             userService.save(new User(username, PasswordUtil.encode(password), 10, -10, Collections.singleton(Role.ROLE_USER)));
+            model.addAttribute("error", "Confirm registration by link in your email");
             return "login";
         }
         model.addAttribute("error", "The email you have entered is already registered");

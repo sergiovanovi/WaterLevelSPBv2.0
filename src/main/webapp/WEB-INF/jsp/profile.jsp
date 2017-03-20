@@ -13,7 +13,7 @@
         <c:if test="${user.util > 0}">Above the specified limits</c:if>
         <c:if test="${user.util < 0}">Below the specified limits</c:if>
     </title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <jsp:include page="headTag.jsp"/>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -60,7 +60,7 @@
         <sec:authorize access="hasRole('ROLE_ADMIN')">
             <tr>
                 <td>Users</td>
-                <td><input class="btn btn-xs btn-danger" onclick="location.href ='${pageContext.request.contextPath}/users'" value="Users"></td>
+                <td><input class="btn btn-xs btn-primary" onclick="location.href ='${pageContext.request.contextPath}/users'" value="Users"></td>
             </tr>
         </sec:authorize>
         <tr>
@@ -77,7 +77,7 @@
         </tr>
         <tr>
             <td>Save Input Limits</td>
-            <td><input class="btn btn-xs btn-danger" type="submit" value="Save"/></td>
+            <td><input class="btn btn-xs btn-success" type="submit" value="Save"/></td>
         </tr>
     </table>
 </form>
