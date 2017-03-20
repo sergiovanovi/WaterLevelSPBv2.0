@@ -108,13 +108,12 @@ public class MainController {
     }
 
     @GetMapping("/users/{id}")
-    public String deleteUser(@PathVariable("id") int id, Model model) {
+    public String deleteUser(@PathVariable("id") int id) {
         if (userService.delete(id)){
             LOG.info(LocalDateTime.now() + " Delete user with id:" + id);
         } else {
             LOG.error(LocalDateTime.now() + " Can not delete user with id:" + id);
         }
-        model.addAttribute("users", userService.getAll());
         LOG.info(LocalDateTime.now() + " Send to users");
         return "redirect:/users";
     }
