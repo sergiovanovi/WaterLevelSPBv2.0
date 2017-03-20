@@ -48,7 +48,7 @@
 
 <div id="chart_div" style="width: 1500px; height: 500px;"></div>
 
-<form  method="post">
+<form method="post">
     <table>
         <tr>
             <td>Current login</td>
@@ -58,8 +58,10 @@
             </td>
         </tr>
         <sec:authorize access="hasRole('ROLE_ADMIN')">
-            <tr>Users</tr>
-            <tr><input class="btn btn-xs btn-danger" onclick="location.href ='${pageContext.request.contextPath}/users'" value="Users"/></tr>
+            <tr>
+                <td>Users</td>
+                <td><input class="btn btn-xs btn-danger" onclick="location.href ='${pageContext.request.contextPath}/users'" value="Users"></td>
+            </tr>
         </sec:authorize>
         <tr>
             <td>Current level</td>

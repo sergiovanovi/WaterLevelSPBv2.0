@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Set;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
@@ -118,6 +116,6 @@ public class MainController {
         }
         model.addAttribute("users", userService.getAll());
         LOG.info(LocalDateTime.now() + " Send to users");
-        return "users";
+        return "redirect:/users";
     }
 }
