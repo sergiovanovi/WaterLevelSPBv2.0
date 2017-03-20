@@ -12,11 +12,11 @@ INSERT INTO users (email, password, min, max, util, enabled) VALUES
 -- disabled admin
 ('tatana-89@mail.ru', '$2a$10$0P4JB2CNMEIodboE7xnnzOQ5.ngroEgHAWp0pSU7spFno8kHLlZ/i', -10, 10, 0, FALSE );
 
-INSERT INTO user_roles (email, role) VALUES
-  ('sergiovanovi@mail.ru', 'ROLE_USER'),
-  ('inbox@sergiovanovi.com', 'ROLE_ADMIN'),
-  ('inbox@sergiovanovi.com', 'ROLE_USER'),
-  ('tatana-89@mail.ru', 'ROLE_ADMIN');
+INSERT INTO user_roles (id, role) VALUES
+  (1, 'ROLE_USER'),
+  (2, 'ROLE_ADMIN'),
+  (2, 'ROLE_USER'),
+  (3, 'ROLE_ADMIN');
 
 INSERT INTO meters (level, date_time) VALUES
   ('0', '2017-03-1 10:00:00'),
