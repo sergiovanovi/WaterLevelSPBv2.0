@@ -14,7 +14,6 @@
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>
         <span style="color: red; " ><c:if test="${!empty error}"><c:out value="${error}"/></c:if></span>
-        OR
         <input class="btn btn-lg btn-info btn-block" onclick="location.href ='${pageContext.request.contextPath}/login'" value="Login"/>
     </form>
 </div>
