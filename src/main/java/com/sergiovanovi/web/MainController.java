@@ -5,6 +5,7 @@ import com.sergiovanovi.model.User;
 import com.sergiovanovi.model.enums.Role;
 import com.sergiovanovi.service.MeterService;
 import com.sergiovanovi.service.UserService;
+import com.sergiovanovi.util.MeterParserAndMailSender;
 import com.sergiovanovi.util.PasswordUtil;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,15 +48,36 @@ public class MainController {
         return "register";
     }
 
+    @GetMapping("/confirm")
+    public String confirmPage(@ModelAttribute("username") String username, @ModelAttribute("password") String password, Model model) {
+        User user = userService.getByEmail(username);
+        if (user != null && PasswordUtil.isMatch(password, user.getPassword())) {
+            user.setEnabled(true);
+            if (userService.save(user) != null) {
+                LOG.info(LocalDateTime.now() + " " + username + " is enabled");
+                model.addAttribute("error", "Account is activate, pls sing in");
+                return "login";
+            }
+        }
+        LOG.error(LocalDateTime.now() + " " + username + " was not find/save");
+        model.addAttribute("error", "The email you are trying to confirm is not registered");
+        return "register";
+    }
+
     @PostMapping("/register")
-    public String savePage(@ModelAttribute("username") String username, @ModelAttribute("password") String password, Model model) {
+    public String registerPage(@ModelAttribute("username") String username, @ModelAttribute("password") String password, Model model) {
         User tryUser = userService.getByEmail(username);
         if (tryUser == null) {
-            userService.save(new User(username, PasswordUtil.encode(password), -10, 10, Collections.singleton(Role.ROLE_USER)));
-            //TODO send confirmation email and impl request processing method
-            model.addAttribute("error", "Confirm registration by link in your email");
-            return "login";
+            User newUser = new User(username, PasswordUtil.encode(password), -10, 10, Collections.singleton(Role.ROLE_USER));
+            if (userService.save(newUser) != null) {
+                MeterParserAndMailSender.sendEmail(username,
+                        "Confirm your account on WLSPB",
+                        "Click the link to confirm the registration http://localhost:8080/wlspb/confirm?username=" + username + "&password=" + password);
+                model.addAttribute("error", "Confirm registration by link in your email");
+                return "login";
+            }
         }
+        LOG.error(LocalDateTime.now() + " " + username +" is already registered");
         model.addAttribute("error", "The email you have entered is already registered");
         return "register";
     }
@@ -105,18 +127,16 @@ public class MainController {
             }
         }
         model.addAttribute("users", userService.getAll());
-        LOG.info(LocalDateTime.now() + " Send to users");
         return "users";
     }
 
     @GetMapping("/users/{id}")
     public String deleteUser(@PathVariable("id") int id) {
-        if (userService.delete(id)){
+        if (userService.delete(id)) {
             LOG.info(LocalDateTime.now() + " Delete user with id:" + id);
         } else {
             LOG.error(LocalDateTime.now() + " Can not delete user with id:" + id);
         }
-        LOG.info(LocalDateTime.now() + " Send to users");
         return "redirect:/users";
     }
 }

@@ -69,7 +69,7 @@ public class MeterParserAndMailSender {
     }
 
     public void checkMeter(double level) {
-        String successEmail = " Send email successfully";
+        String message = "Current level " + level + " cm." + "\n" + "More info here http://www.pasp.ru/op-info-weather?mode=current";
 
         List<User> listUsers = (List<User>) userService.getAll();
         for (User user : listUsers) {
@@ -79,25 +79,21 @@ public class MeterParserAndMailSender {
                 double max = user.getMax();
                 String email = user.getEmail();
 
-                if (level > max && util != 1 && sendEmail(email, "The water level in the port of St. Petersburg is higher than " + user.getMax(), level)) {
+                if (level > max && util != 1 && sendEmail(email, "The water level in the port of St. Petersburg is higher than " + user.getMax(), message)) {
                     user.setUtil(1);
                     userService.save(user);
-                    LOG.info(LocalDateTime.now() + successEmail);
-                } else if (level < min && util != -1 && sendEmail(email, "The water level in the port of St. Petersburg is below " + user.getMin(), level)) {
+                } else if (level < min && util != -1 && sendEmail(email, "The water level in the port of St. Petersburg is below " + user.getMin(), message)) {
                     user.setUtil(-1);
                     userService.save(user);
-                    LOG.info(LocalDateTime.now() + successEmail);
-                } else if (level <= max && level >= min && util != 0 && sendEmail(email, "The water level in the port of St. Petersburg ranges from " + user.getMin() + " to " + user.getMax(), level)) {
+                } else if (level <= max && level >= min && util != 0 && sendEmail(email, "The water level in the port of St. Petersburg ranges from " + user.getMin() + " to " + user.getMax(), message)) {
                     user.setUtil(0);
                     userService.save(user);
-                    LOG.info(LocalDateTime.now() + successEmail);
                 }
             }
         }
     }
 
-    //TODO divided into two methods(configMail and sendMail)
-    public boolean sendEmail(String email, String message, double meter) {
+    public static boolean sendEmail(String email, String title, String message) {
         String from = "waterlevelinfospb@mail.ru";
         String username = "waterlevelinfospb@mail.ru";
         String password = "Assword11";
@@ -120,9 +116,10 @@ public class MeterParserAndMailSender {
         try {
             mimeMessage.setFrom(new InternetAddress(from));
             mimeMessage.addRecipients(Message.RecipientType.TO, email);
-            mimeMessage.setSubject(message);
-            mimeMessage.setText("Current level " + meter + " cm." + "\n" + message + ".\n" + "More info here http://www.pasp.ru/op-info-weather?mode=current");
+            mimeMessage.setSubject(title);
+            mimeMessage.setText(message);
             Transport.send(mimeMessage);
+            LOG.info(LocalDateTime.now() + "  Send email to " + email +" successfully");
             return true;
         } catch (MessagingException e) {
             LOG.info(LocalDateTime.now() + " Sending email failed");
