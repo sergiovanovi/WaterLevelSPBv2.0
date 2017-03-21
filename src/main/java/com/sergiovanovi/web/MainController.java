@@ -38,7 +38,7 @@ public class MainController {
 
     @GetMapping("/login")
     public String loginPage(@ModelAttribute("error") String hasError, Model model) {
-        if (hasError.equals("true")) model.addAttribute("error", "Invalid login and password");
+        if (hasError.equals("true")) model.addAttribute("error", "Invalid/not confirm login and password");
         return "login";
     }
 
@@ -51,7 +51,8 @@ public class MainController {
     public String savePage(@ModelAttribute("username") String username, @ModelAttribute("password") String password, Model model) {
         User tryUser = userService.getByEmail(username);
         if (tryUser == null) {
-            userService.save(new User(username, PasswordUtil.encode(password), 10, -10, Collections.singleton(Role.ROLE_USER)));
+            userService.save(new User(username, PasswordUtil.encode(password), -10, 10, Collections.singleton(Role.ROLE_USER)));
+            //TODO send confirmation email and impl request processing method
             model.addAttribute("error", "Confirm registration by link in your email");
             return "login";
         }

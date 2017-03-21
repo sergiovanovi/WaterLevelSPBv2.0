@@ -10,7 +10,7 @@ INSERT INTO users (email, password, min, max, util, enabled) VALUES
 -- admin
 ('inbox@sergiovanovi.com', '$2a$10$3A9Tu7JgdXWaOF.zmjZNje4XDj7Ngw9EyY1DhU8rwWL8huBY67LzW', -10, 10, 0, TRUE),
 -- disabled admin
-('tatana-89@mail.ru', '$2a$10$0P4JB2CNMEIodboE7xnnzOQ5.ngroEgHAWp0pSU7spFno8kHLlZ/i', -10, 10, 0, FALSE );
+('tatana-89@mail.ru', '$2a$10$0P4JB2CNMEIodboE7xnnzOQ5.ngroEgHAWp0pSU7spFno8kHLlZ/i', -10, 10, 0, FALSE);
 
 INSERT INTO user_roles (id, role) VALUES
   (1, 'ROLE_USER'),
