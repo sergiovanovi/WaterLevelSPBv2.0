@@ -69,11 +69,11 @@
         </tr>
         <tr>
             <td>Max level</td>
-            <td><input name="max" type="number" step="0.1" min="${user.min}" value="${user.max}"/></td>
+            <td><input name="max" type="number" step="0.1" min="${user.min}" value="${user.max}" required/></td>
         </tr>
         <tr>
             <td>Min level</td>
-            <td><input name="min" type="number" step="0.1" max="${user.max}" value="${user.min}"/></td>
+            <td><input name="min" type="number" step="0.1" max="${user.max}" value="${user.min}" required/></td>
         </tr>
         <tr>
             <td>Save Input Limits</td>

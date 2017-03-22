@@ -10,7 +10,7 @@
     <c:url value="/spring_security_check" var="loginUrl"/>
     <form action="${loginUrl}" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" name="username" placeholder="Email address" required autofocus>
+        <input type="email" class="form-control" name="username" placeholder="Email address" required autofocus>
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <button class="btn btn-lg btn-success btn-block" type="submit">Login</button>
         <span style="color: red; " ><c:if test="${!empty error}"><c:out value="${error}"/></c:if></span>

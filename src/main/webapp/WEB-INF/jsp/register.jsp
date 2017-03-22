@@ -7,10 +7,9 @@
 </head>
 <body>
 <div class="container" style="width: 300px;">
-    <c:url value="/register" var="registerUrl"/>
-    <form action="${registerUrl}" method="post">
+    <form method="post">
         <h2 class="form-signin-heading">Create new account</h2>
-        <input type="text" class="form-control" name="username" placeholder="Email address" required autofocus>
+        <input type="email" class="form-control" name="username" placeholder="Email address" required autofocus>
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <button class="btn btn-lg btn-success btn-block" type="submit">Register</button>
         <span style="color: red; " ><c:if test="${!empty error}"><c:out value="${error}"/></c:if></span>
