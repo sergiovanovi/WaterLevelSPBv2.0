@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if (savedUser != null) {
             LOG.info(LocalDateTime.now() + " user successfully SAVED with email: " + user.getEmail());
         } else {
-            LOG.error(LocalDateTime.now() + " user NOT SAVED with email: " + user.getEmail());
+            LOG.error(LocalDateTime.now() + "user NOT SAVED with email: " + user.getEmail());
         }
         return savedUser;
     }
