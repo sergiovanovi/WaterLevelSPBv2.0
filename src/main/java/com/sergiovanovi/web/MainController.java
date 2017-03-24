@@ -50,15 +50,21 @@ public class MainController {
     @GetMapping("/confirm")
     public String confirmPage(@ModelAttribute("username") String username, @ModelAttribute("password") String password, Model model) {
         User user = userService.getByEmail(username);
-        if (user != null && PasswordUtil.isMatch(password, user.getPassword())) {
-            user.setEnabled(true);
-            if (userService.save(user) != null) {
-                LOG.info(LocalDateTime.now() + " " + username + " is enabled");
-                model.addAttribute("error", username + " is activate, pls sing in");
-                return "login";
+        if (user != null) {
+            if (PasswordUtil.isMatch(password, user.getPassword())) {
+                user.setEnabled(true);
+                if (userService.save(user) != null) {
+                    LOG.info(LocalDateTime.now() + " " + username + " is enabled");
+                    model.addAttribute("error", username + " is activate, pls sing in");
+                    return "login";
+                } else {
+                    LOG.error(LocalDateTime.now() + " " + username + " is NOT enabled");
+                    model.addAttribute("error", "Sorry, try later");
+                    return "register";
+                }
             } else {
-                LOG.error(LocalDateTime.now() + " " + username + " is NOT enabled");
-                model.addAttribute("error", "Sorry, try later");
+                LOG.error(LocalDateTime.now() + " " + username + " invalid registration link");
+                model.addAttribute("error", "Invalid registration link");
                 return "register";
             }
         }
