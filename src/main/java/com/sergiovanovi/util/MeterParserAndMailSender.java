@@ -69,7 +69,7 @@ public class MeterParserAndMailSender {
     }
 
     public void checkMeter(double level) {
-        String message = "Current level " + level + " cm." + "\n" + "More info here http://www.pasp.ru/op-info-weather?mode=current";
+        String message = "Current level " + level + " cm." + "\n" + "More info here http://spun.fkpkzs.ru/Level/Gorny";
 
         List<User> listUsers = (List<User>) userService.getAll();
         for (User user : listUsers) {
