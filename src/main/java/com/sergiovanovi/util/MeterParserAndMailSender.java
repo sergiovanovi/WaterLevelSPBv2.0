@@ -35,7 +35,7 @@ public class MeterParserAndMailSender {
     public void parsMeter() {
 
         try {
-            URL url = new URL("http://www.pasp.ru/op-info-weather?mode=current");
+            URL url = new URL("http://spun.fkpkzs.ru/Level/Gorny");
 
             try (LineNumberReader reader = new LineNumberReader(new InputStreamReader(url.openStream()))){
                 String stringMeter;
@@ -43,9 +43,9 @@ public class MeterParserAndMailSender {
                 //TODO Make it easier and ask the measurement provider for a direct link
                 do {
                     stringMeter = reader.readLine();
-                    if (reader.getLineNumber() == 184) {
+                    if (reader.getLineNumber() == 265) {
                         stringMeter = stringMeter.trim();
-                        stringMeter = stringMeter.substring(stringMeter.indexOf(":") + 2, stringMeter.lastIndexOf(" "));
+                        stringMeter = stringMeter.substring(stringMeter.indexOf("<span>") + 6, stringMeter.indexOf("</span>"));
                         double waterLevel = Double.parseDouble(stringMeter);
 
                         Meter meter = new Meter();
